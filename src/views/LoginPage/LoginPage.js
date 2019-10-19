@@ -5,11 +5,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
 import Email from "@material-ui/icons/Email";
-import People from "@material-ui/icons/People";
 // core components
-import Header from "components/Header/Header.js";
-import HeaderLinks from "components/Header/HeaderLinks.js";
-import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
@@ -34,13 +30,13 @@ export default function LoginPage(props) {
   const { ...rest } = props;
   return (
     <div>
-      <Header
+      {/* <Header
         absolute
         color="transparent"
         brand="Material Kit React"
         rightLinks={<HeaderLinks />}
         {...rest}
-      />
+      /> */}
       <div
         className={classes.pageHeader}
         style={{
@@ -54,10 +50,11 @@ export default function LoginPage(props) {
             <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
                 <form className={classes.form}>
-                  <CardHeader color="primary" className={classes.cardHeader}>
-                    <h4>Login</h4>
-                    <div className={classes.socialLine}>
-                      <Button
+                  <a href="/signup-page">
+                    <CardHeader color="success" className={classes.cardHeader}>
+                      <h4>Click to Register</h4>
+                      <div className={classes.socialLine}>
+                        {/* <Button
                         justIcon
                         href="#pablo"
                         target="_blank"
@@ -83,12 +80,13 @@ export default function LoginPage(props) {
                         onClick={e => e.preventDefault()}
                       >
                         <i className={"fab fa-google-plus-g"} />
-                      </Button>
-                    </div>
-                  </CardHeader>
-                  <p className={classes.divider}>Or Be Classical</p>
+                      </Button> */}
+                      </div>
+                    </CardHeader>
+                  </a>
+                  <p className={classes.divider}>Enter your Credentials</p>
                   <CardBody>
-                    <CustomInput
+                    {/* <CustomInput
                       labelText="First Name..."
                       id="first"
                       formControlProps={{
@@ -102,10 +100,11 @@ export default function LoginPage(props) {
                           </InputAdornment>
                         )
                       }}
-                    />
+                    /> */}
                     <CustomInput
                       labelText="Email..."
                       id="email"
+                      success
                       formControlProps={{
                         fullWidth: true
                       }}
@@ -121,6 +120,7 @@ export default function LoginPage(props) {
                     <CustomInput
                       labelText="Password"
                       id="pass"
+                      success
                       formControlProps={{
                         fullWidth: true
                       }}
@@ -138,8 +138,8 @@ export default function LoginPage(props) {
                     />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button simple color="primary" size="lg">
-                      Get started
+                    <Button color="success" size="lg" onClick={props.signIn}>
+                      Sign In
                     </Button>
                   </CardFooter>
                 </form>
@@ -147,7 +147,7 @@ export default function LoginPage(props) {
             </GridItem>
           </GridContainer>
         </div>
-        <Footer whiteFont />
+        {/* <Footer whiteFont /> */}
       </div>
     </div>
   );
