@@ -13,6 +13,8 @@ import Favorite from "@material-ui/icons/Favorite";
 
 import styles from "assets/jss/material-kit-react/components/footerStyle.js";
 
+import { Facebook,Instagram,Twitter} from "@material-ui/icons";
+
 const useStyles = makeStyles(styles);
 
 export default function Footer(props) {
@@ -31,13 +33,22 @@ export default function Footer(props) {
       <div className={classes.container}>
         <div className={classes.left}>
           <List className={classes.list}>
-            <ListItem className={classes.inlineBlock}>
+            {/* <ListItem className={classes.inlineBlock}>
               <a
                 href="https://www.creative-tim.com/?ref=mkr-footer"
                 className={classes.block}
                 target="_blank"
               >
                 Creative Tim
+              </a>
+            </ListItem> */}
+            <ListItem className={classes.inlineBlock}>
+              <a
+                href="https://www.creative-tim.com/presentation?ref=mkr-footer"
+                className={classes.block}
+                target="_blank"
+              >
+                About us
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
@@ -46,7 +57,25 @@ export default function Footer(props) {
                 className={classes.block}
                 target="_blank"
               >
-                About us
+               <Facebook/>
+              </a>
+            </ListItem>
+            <ListItem className={classes.inlineBlock}>
+              <a
+                href="https://www.creative-tim.com/presentation?ref=mkr-footer"
+                className={classes.block}
+                target="_blank"
+              >
+                <Instagram/>
+              </a>
+            </ListItem>
+            <ListItem className={classes.inlineBlock}>
+              <a
+                href="https://www.creative-tim.com/presentation?ref=mkr-footer"
+                className={classes.block}
+                target="_blank"
+              >
+                <Twitter/>
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
@@ -70,16 +99,17 @@ export default function Footer(props) {
           </List>
         </div>
         <div className={classes.right}>
-          &copy; {1900 + new Date().getYear()} , made with{" "}
-          <Favorite className={classes.icon} /> by{" "}
-          <a
+          &copy; {1900 + new Date().getYear()} 
+          {/* , made with{" "}
+          <Favorite className={classes.icon} /> by{" "} */}
+          {/* <a
             href="https://www.creative-tim.com?ref=mkr-footer"
             className={aClasses}
             target="_blank"
           >
             Creative Tim
           </a>{" "}
-          for a better web.
+          for a better web. */}
         </div>
       </div>
     </footer>

@@ -9,9 +9,11 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Card from "components/Card/Card.js";
 
-import image1 from "assets/img/bg.jpg";
-import image2 from "assets/img/bg2.jpg";
-import image3 from "assets/img/bg3.jpg";
+import image1 from "assets/img/1.jpeg";
+import image2 from "assets/img/2.jpeg";
+import image3 from "assets/img/3.jpeg";
+import image4 from "assets/img/4.jpeg";
+import image5 from "assets/img/5.jpeg";
 
 export default function SectionCarousel() {
   const settings = {
@@ -28,7 +30,7 @@ export default function SectionCarousel() {
         <Card>
           <Carousel {...settings}>
             <div>
-              <img src={image1} alt="First slide" className="slick-image"  style={{width:"100%",height:"500px"}} />
+              <img src={image1} alt="First slide" className="slick-image"  style={{height:"85vh"}} />
               {/* <div className="slick-caption">
                 <h4>
                   <LocationOn className="slick-icons" />
@@ -37,16 +39,34 @@ export default function SectionCarousel() {
               </div> */}
             </div>
             <div>
-              <img src={image2} alt="Second slide" className="slick-image"  style={{width:"100%",height:"500px"}} />
+              <img src={image2} alt="First slide" className="slick-image"  style={{height:"85vh"}} />
               {/* <div className="slick-caption">
                 <h4>
                   <LocationOn className="slick-icons" />
-                  Somewhere Beyond, United States
+                  Yellowstone National Park, United States
                 </h4>
               </div> */}
             </div>
             <div>
-              <img src={image3} alt="Third slide" className="slick-image"  style={{width:"100%",height:"500px"}}/>
+              <img src={image3} alt="First slide" className="slick-image"  style={{height:"85vh"}} />
+              {/* <div className="slick-caption">
+                <h4>
+                  <LocationOn className="slick-icons" />
+                  Yellowstone National Park, United States
+                </h4>
+              </div> */}
+            </div>
+            <div>
+              <img src={image4} alt="First slide" className="slick-image"  style={{height:"85vh"}} />
+              {/* <div className="slick-caption">
+                <h4>
+                  <LocationOn className="slick-icons" />
+                  Yellowstone National Park, United States
+                </h4>
+              </div> */}
+            </div>
+            <div>
+              <img src={image5} alt="First slide" className="slick-image"  style={{height:"85vh"}} />
               {/* <div className="slick-caption">
                 <h4>
                   <LocationOn className="slick-icons" />

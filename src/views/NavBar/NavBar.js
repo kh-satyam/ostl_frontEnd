@@ -12,7 +12,7 @@ const NavBar = () => {
     <Header
       color="dark"
       routes={dashboardRoutes}
-      brand="IIIT,Bangalore"
+      brand="OSTL @ IIIT,Bangalore"
       rightLinks={<HeaderLinks />}
       fixed
       changeColorOnScroll={{

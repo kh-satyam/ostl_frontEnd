@@ -20,7 +20,7 @@ import Carousel from "components/Carousel/Carousel";
 import ProductSection from "./Sections/ProductSection.js";
 import TeamSection from "./Sections/TeamSection.js";
 import WorkSection from "./Sections/WorkSection.js";
-
+import NavBar from "../NavBar/NavBar";
 
 const dashboardRoutes = [];
 
@@ -30,16 +30,20 @@ export default function LandingPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
   return (
-    <div style={{ display: "block" ,width:"100%",height:"100px"}} >
-      <Carousel />
+    <div style={{marginTop:"1%"}}>
+      <Carousel/>
       <div className={classNames(classes.main, classes.mainRaised)}>
-        <div className={classes.container}>
-          {/* <ProductSection />
-          <TeamSection />
-          <WorkSection /> */}
-        </div>
-      </div>
-      <Footer />
+        {/* <div className={classes.container}> */}
+        <GridContainer justify="center">
+        <GridItem xs={12} sm={12} md={12}>
+        <Footer/>
+        </GridItem>
+        
+      </GridContainer>
+        {/* </div> */}
+       </div>
+       <br></br>
+      
     </div>
   );
 }

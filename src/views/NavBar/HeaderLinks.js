@@ -107,7 +107,7 @@ export default function HeaderLinks(props) {
           color="transparent"
           target="_blank"
           className={classes.navLink}
-        ><ContactMail/>CONTACT US
+        ><ContactMail/>THESIS
           {/* <CloudDownload className={classes.icons} /> Download */}
         </Button>
       </ListItem>  
