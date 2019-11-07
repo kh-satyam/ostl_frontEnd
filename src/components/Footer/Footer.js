@@ -53,6 +53,15 @@ export default function Footer(props) {
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a
+                href="http://blog.creative-tim.com/?ref=mkr-footer"
+                className={classes.block}
+                target="_blank"
+              >
+                FAQ
+              </a>
+            </ListItem>
+            <ListItem className={classes.inlineBlock}>
+              <a
                 href="https://www.creative-tim.com/presentation?ref=mkr-footer"
                 className={classes.block}
                 target="_blank"
@@ -78,28 +87,14 @@ export default function Footer(props) {
                 <Twitter/>
               </a>
             </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                href="http://blog.creative-tim.com/?ref=mkr-footer"
-                className={classes.block}
-                target="_blank"
-              >
-                Blog
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                href="https://www.creative-tim.com/license?ref=mkr-footer"
-                className={classes.block}
-                target="_blank"
-              >
-                Licenses
-              </a>
-            </ListItem>
+            
           </List>
         </div>
         <div className={classes.right}>
           &copy; {1900 + new Date().getYear()} 
+          {
+            ", All Rights Reserved by Open Source Technology Lab, IIIT,Bangalore."
+          }
           {/* , made with{" "}
           <Favorite className={classes.icon} /> by{" "} */}
           {/* <a

@@ -36,6 +36,7 @@ export default function LandingPage(props) {
         {/* <div className={classes.container}> */}
         <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={12}>
+          <br></br>
         <Footer/>
         </GridItem>
         

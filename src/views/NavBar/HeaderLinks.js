@@ -20,7 +20,7 @@ import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
 import { People,LibraryBooks,LaptopChromebook,AttachFile,ContactMail,
-  Keyboard,Home,Help } from "@material-ui/icons";
+  Keyboard,Home,Help,Info } from "@material-ui/icons";
 
 const useStyles = makeStyles(styles);
 
@@ -97,7 +97,7 @@ export default function HeaderLinks(props) {
           color="transparent"
           target="_blank"
           className={classes.navLink}
-        ><AttachFile/>LEARNING MATERIALS
+        ><AttachFile/>ARTICLES
           {/* <CloudDownload className={classes.icons} /> Download */}
         </Button>
       </ListItem>  
@@ -117,7 +117,7 @@ export default function HeaderLinks(props) {
           color="transparent"
           target="_blank"
           className={classes.navLink}
-        ><Help/>FAQ
+        ><Info/>NEWS
           {/* <CloudDownload className={classes.icons} /> Download */}
         </Button>
       </ListItem>  
