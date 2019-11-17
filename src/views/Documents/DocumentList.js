@@ -1,5 +1,5 @@
 import React from "react";
-import DocumentView from "./DocumentView";
+import DocumentCard from "./DocumentCard";
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
 import classNames from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
@@ -31,7 +31,12 @@ const DocumentList = props => {
     >
       {list.map(document => (
         <GridItem xs={12} md={6} key={document.id}>
-          <DocumentView title={document.title} link={document.link} />
+          <DocumentCard
+            id={document.id}
+            title={document.title}
+            link={document.link}
+            other={document.other}
+          />
         </GridItem>
       ))}
     </GridContainer>

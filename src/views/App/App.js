@@ -7,6 +7,7 @@ import LandingPage from "views/LandingPage/LandingPage.js";
 import NavBar from "../NavBar/NavBar";
 import LoginPage from "views/LoginPage/LoginPage.js";
 import DocumentList from "views/Documents/DocumentList.js";
+import DocumentView from "views/Documents/DocumentView.js";
 export class App extends Component {
   hist = createBrowserHistory();
   state = {
@@ -43,7 +44,7 @@ export class App extends Component {
           <Route path="/projects" type="projects" component={DocumentList} />
           <Route path="/articles" type="articles" component={DocumentList} />
           <Route path="/thesis" type="thesis" component={DocumentList} />
-
+          <Route path="/document/:id" component={DocumentView} />
           <Route path="/profile-page" component={ProfilePage} />
           <Route exact path="/" component={LandingPage} />
         </Router>
