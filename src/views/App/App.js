@@ -8,6 +8,7 @@ import NavBar from "../NavBar/NavBar";
 import LoginPage from "views/LoginPage/LoginPage.js";
 import DocumentList from "views/Documents/DocumentList.js";
 import DocumentView from "views/Documents/DocumentView.js";
+import AdminDashBoard from "views/Admin/AdminDashboard/AdminDashboard.js";
 export class App extends Component {
   hist = createBrowserHistory();
   state = {
@@ -35,6 +36,10 @@ export class App extends Component {
             exact
             path="/login"
             component={() => <LoginPage signIn={this.signInHandler} />}
+          />
+          <Route
+            path="/admin"
+            component={AdminDashBoard}
           />
           <Route
             path="/publications"
