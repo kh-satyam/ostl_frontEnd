@@ -53,9 +53,8 @@ export default function HeaderLinks(props) {
       </ListItem> */}
       <ListItem className={classes.listItem}>
         <Button
-          href="https://www.creative-tim.com/product/material-kit-react?ref=mkr-navbar"
+          href="/"
           color="transparent"
-          target="_blank"
           className={classes.navLink } 
         ><Home/>HOME
           {/* <CloudDownload className={classes.icons} /> Download */}
@@ -63,9 +62,8 @@ export default function HeaderLinks(props) {
       </ListItem>
       <ListItem className={classes.listItem}>
         <Button
-          href="https://www.creative-tim.com/product/material-kit-react?ref=mkr-navbar"
+          href="/members"
           color="transparent"
-          target="_blank"
           className={classes.navLink}
         ><People/>MEMBERS
           {/* <CloudDownload className={classes.icons} /> Download */}
@@ -73,9 +71,8 @@ export default function HeaderLinks(props) {
       </ListItem>  
       <ListItem className={classes.listItem}>
         <Button
-          href="https://www.creative-tim.com/product/material-kit-react?ref=mkr-navbar"
+          href="/publications"
           color="transparent"
-          target="_blank"
           className={classes.navLink}
         ><LibraryBooks/>PUBLICATIONS
           {/* <CloudDownload className={classes.icons} /> Download */}
@@ -83,9 +80,8 @@ export default function HeaderLinks(props) {
       </ListItem>  
       <ListItem className={classes.listItem}>
         <Button
-          href="https://www.creative-tim.com/product/material-kit-react?ref=mkr-navbar"
+          href="/projects"
           color="transparent"
-          target="_blank"
           className={classes.navLink}
         ><LaptopChromebook/>PROJECTS
           {/* <CloudDownload className={classes.icons} /> Download */}
@@ -93,9 +89,8 @@ export default function HeaderLinks(props) {
       </ListItem>  
       <ListItem className={classes.listItem}>
         <Button
-          href="https://www.creative-tim.com/product/material-kit-react?ref=mkr-navbar"
+          href="/articles"
           color="transparent"
-          target="_blank"
           className={classes.navLink}
         ><AttachFile/>ARTICLES
           {/* <CloudDownload className={classes.icons} /> Download */}
@@ -103,9 +98,8 @@ export default function HeaderLinks(props) {
       </ListItem>  
       <ListItem className={classes.listItem}>
         <Button
-          href="https://www.creative-tim.com/product/material-kit-react?ref=mkr-navbar"
+          href="/thesis"
           color="transparent"
-          target="_blank"
           className={classes.navLink}
         ><ContactMail/>THESIS
           {/* <CloudDownload className={classes.icons} /> Download */}
@@ -113,9 +107,8 @@ export default function HeaderLinks(props) {
       </ListItem>  
       <ListItem className={classes.listItem}>
         <Button
-          href="https://www.creative-tim.com/product/material-kit-react?ref=mkr-navbar"
+          href="/news"
           color="transparent"
-          target="_blank"
           className={classes.navLink}
         ><Info/>NEWS
           {/* <CloudDownload className={classes.icons} /> Download */}
@@ -123,9 +116,8 @@ export default function HeaderLinks(props) {
       </ListItem>  
       <ListItem className={classes.listItem}>
         <Button
-          href="https://www.creative-tim.com/product/material-kit-react?ref=mkr-navbar"
+          href="/login"
           color="transparent"
-          target="_blank"
           className={classes.navLink}
         ><Keyboard/>LOGIN
           {/* <CloudDownload className={classes.icons} /> Download */}
