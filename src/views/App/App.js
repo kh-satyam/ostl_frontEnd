@@ -37,18 +37,23 @@ export class App extends Component {
             path="/login"
             component={() => <LoginPage signIn={this.signInHandler} />}
           />
-          <Route
-            path="/admin"
-            component={AdminDashBoard}
-          />
+          <Route path="/admin" component={AdminDashBoard} />
           <Route
             path="/publications"
-            type="publications"
-            component={DocumentList}
+            component={() => <DocumentList type="Publication" />}
           />
-          <Route path="/projects" type="projects" component={DocumentList} />
-          <Route path="/articles" type="articles" component={DocumentList} />
-          <Route path="/thesis" type="thesis" component={DocumentList} />
+          <Route
+            path="/projects"
+            component={() => <DocumentList type="Project" />}
+          />
+          <Route
+            path="/articles"
+            component={() => <DocumentList type="Article" />}
+          />
+          <Route
+            path="/thesis"
+            component={() => <DocumentList type="Thesis" />}
+          />
           <Route path="/document/:id" component={DocumentView} />
           <Route path="/profile-page" component={ProfilePage} />
           <Route exact path="/" component={LandingPage} />
