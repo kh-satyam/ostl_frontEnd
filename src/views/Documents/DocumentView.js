@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import sampleFile from "assets/pdf/sample.pdf";
 
-const DOCUMENT_URL = "https://localhost:8086/document"
+const DOCUMENT_URL = "https://localhost:8086/document";
 
 const DocumentView = props => {
   const [numPages, setNumPages] = useState(100);
@@ -17,9 +17,7 @@ const DocumentView = props => {
         {" "}
       </object>
 
-      <p>
-        Page {pageNumber} of {numPages}
-      </p>
+      <p>Page 1 of {numPages}</p>
     </div>
   );
 };
