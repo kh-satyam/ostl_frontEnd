@@ -10,6 +10,7 @@ import {
   cardLink,
   cardSubtitle
 } from "assets/jss/material-kit-react.js";
+import PropTypes from "prop-types";
 
 const styles = {
   cardTitle,
@@ -33,7 +34,16 @@ const DocumentCard = props => {
 
   const classes = useStyles();
 
-  const { title, other, link, id } = props;
+  const {
+    id,
+    title,
+    description,
+    date,
+    link,
+    documentType,
+    viewCount,
+    downloadCount
+  } = props;
   const url = "/document/" + id;
 
   const cardBody = () => {
@@ -43,7 +53,7 @@ const DocumentCard = props => {
           <h4 className={classes.cardTitle}>{title}</h4>
           {
             <h5 className={classes.cardSubtitle}>
-              {title}, {other}, {link}
+              {description}, {documentType}, {link}
             </h5>
           }
         </CardBody>
@@ -63,3 +73,14 @@ const DocumentCard = props => {
 };
 
 export default DocumentCard;
+
+DocumentCard.propTypes = {
+  id: PropTypes.number,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  date: PropTypes.string,
+  link: PropTypes.string,
+  documentType: PropTypes.string,
+  viewCount: PropTypes.number,
+  downloadCount: PropTypes.number
+};
