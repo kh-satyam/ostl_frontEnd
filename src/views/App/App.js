@@ -9,16 +9,14 @@ import LoginPage from "views/LoginPage/LoginPage.js";
 import DocumentList from "views/Documents/DocumentList.js";
 import DocumentView from "views/Documents/DocumentView.js";
 import AdminDashBoard from "views/Admin/AdminDashboard/AdminDashboard.js";
+import axios from 'axios';
+import cookie from 'react-cookies';
+import https from 'https';
+
 export class App extends Component {
   hist = createBrowserHistory();
   state = {
     authenticated: false
-  };
-
-  signInHandler = () => {
-    this.setState({
-      authenticated: true
-    });
   };
 
   signOutHandler = () => {
@@ -35,7 +33,7 @@ export class App extends Component {
           <Route
             exact
             path="/login"
-            component={() => <LoginPage signIn={this.signInHandler} />}
+            component={() => <LoginPage />}
           />
           <Route path="/admin" component={AdminDashBoard} />
           <Route
@@ -62,5 +60,19 @@ export class App extends Component {
     );
   }
 }
+
+
+// const mapStateToProps = state => {
+//   return {
+//     token:state.token
+//   };
+// };
+
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     addToken: (token) => dispatch({type:"ADD_BEARER_TOKEN",payload:token})
+//   };
+// };
+
 
 export default App;
