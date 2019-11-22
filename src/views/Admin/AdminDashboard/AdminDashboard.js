@@ -29,6 +29,8 @@ class AdminDashboard extends Component {
     this.state = { authenticated: false };
   }
   
+  hist = createBrowserHistory();
+
   componentDidMount() {
     //cookie.remove('ostlCookie', { path: '/' })
     var ostlCookie = cookie.load("ostlCookie");
@@ -41,9 +43,9 @@ class AdminDashboard extends Component {
         
     }
   }
-  hist = createBrowserHistory();
+  
   signInHandler(authenticationDetails) {
-    
+
     axios.post('http://localhost:8086/authenticate', {
       "password": authenticationDetails.password,
       "userName": authenticationDetails.userName
@@ -63,50 +65,52 @@ class AdminDashboard extends Component {
   }
 
   render() {
+    console.log(this.state.authenticated);
+    let components;
+    if(this.state.authenticated) {
+      console.log(" strue");
+      components = <div style={{ margin: "10%" }}>
+      <NavPills
+        tabs={[
+          {
+            tabButton: "Upload Document",
+            tabContent: <DocumentInputComponent />
+          },
+          {
+            tabButton: "Update Publications",
+            tabContent: <DocumentInputComponent />
+          },
+          {
+            tabButton: "Update Projects",
+            tabContent: <DocumentInputComponent />
+          },
+          {
+            tabButton: "Update Thesis",
+            tabContent: <DocumentInputComponent />
+          },
+          {
+            tabButton: "Update Articles",
+            tabContent: <DocumentInputComponent />
+          },
+          {
+            tabButton: "Update News",
+            tabContent: <DocumentInputComponent />
+          },
+          {
+            tabButton: "Update CorporateCollaboration",
+            tabContent: <DocumentInputComponent />
+          }
+        ]}
+      />
+    </div>;
+    }else{
+      console.log("s false");
+      components = <LoginComponent signInHandler={this.signInHandler} />;
+    }
     return (
       <div >
         <AdminNavBar />
-        (this.state.authenticated ?
-          <div style={{ margin: "10%" }}>
-          <NavPills
-            tabs={[
-              {
-                tabButton: "Upload Document",
-                tabContent: <DocumentInputComponent />
-              },
-              {
-                tabButton: "Update Publications",
-                tabContent: <DocumentInputComponent />
-              },
-              {
-                tabButton: "Update Projects",
-                tabContent: <DocumentInputComponent />
-              },
-              {
-                tabButton: "Update Thesis",
-                tabContent: <DocumentInputComponent />
-              },
-              {
-                tabButton: "Update Articles",
-                tabContent: <DocumentInputComponent />
-              },
-              {
-                tabButton: "Update News",
-                tabContent: <DocumentInputComponent />
-              },
-              {
-                tabButton: "Update CorporateCollaboration",
-                tabContent: <DocumentInputComponent />
-              }
-            ]}
-          />
-
-
-        </div>
-        
-        :
-        <LoginComponent signInHandler={this.signInHandler} />
-          )
+        {components}
         </div>
     );
   }
