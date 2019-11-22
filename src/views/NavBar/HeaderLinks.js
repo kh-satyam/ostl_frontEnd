@@ -13,7 +13,6 @@ import Tooltip from "@material-ui/core/Tooltip";
 
 // @material-ui/icons
 import { Apps, CloudDownload } from "@material-ui/icons";
-
 // core components
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
@@ -52,7 +51,7 @@ export default function HeaderLinks(props) {
               All components
             </Link>,
             <a
-              href="https://creativetimofficial.github.io/material-kit-react/#/documentation?ref=mkr-navbar"
+              to="https://creativetimofficial.github.io/material-kit-react/#/documentation?ref=mkr-navbar"
               target="_blank"
               className={classes.dropdownLink}
             >
@@ -70,76 +69,77 @@ export default function HeaderLinks(props) {
         </Button>
       </ListItem> */}
       <ListItem className={classes.listItem}>
-        <Button
-          href="/members"
+        <Link
+          to="/members"
           color="transparent"
           className={classes.navLink}
-        ><People/>MEMBERS
+        ><People style = {{ fontSize:"1.2rem"}}/>&nbsp;MEMBERS
           {/* <CloudDownload className={classes.icons} /> Download */}
-        </Button>
+        </Link>
       </ListItem>  
       <ListItem className={classes.listItem}>
-        <Button
-          href="/publications"
+        {/* <Link to="/publications"  className={classes.navLink}> */}
+        <Link
           color="transparent"
+          to="/publications"  
           className={classes.navLink}
-        ><LibraryBooks/>PUBLICATIONS
+        ><LibraryBooks style = {{ fontSize:"1.2rem"}}/>&nbsp;PUBLICATIONS
           {/* <CloudDownload className={classes.icons} /> Download */}
-        </Button>
+        </Link>
       </ListItem>  
       <ListItem className={classes.listItem}>
-        <Button
-          href="/projects"
-          color="transparent"
+        <Link
+          to="/projects"
+          color="Linkarent"
           className={classes.navLink}
-        ><LaptopChromebook/>PROJECTS
+        ><LaptopChromebook style = {{ fontSize:"1.2rem"}}/>&nbsp;PROJECTS
           {/* <CloudDownload className={classes.icons} /> Download */}
-        </Button>
+        </Link>
       </ListItem>  
       <ListItem className={classes.listItem}>
-        <Button
-          href="/articles"
+        <Link
+          to="/articles"
           color="transparent"
           className={classes.navLink}
-        ><AttachFile/>ARTICLES
+        ><AttachFile style = {{ fontSize:"1.2rem"}}/>&nbsp;ARTICLES
           {/* <CloudDownload className={classes.icons} /> Download */}
-        </Button>
+        </Link>
       </ListItem>  
       <ListItem className={classes.listItem}>
-        <Button
-          href="/thesis"
+        <Link
+          to="/thesis"
           color="transparent"
           className={classes.navLink}
-        ><ContactMail/>THESIS
+        ><ContactMail style = {{ fontSize:"1.2rem"}}/>&nbsp;THESIS
           {/* <CloudDownload className={classes.icons} /> Download */}
-        </Button>
+        </Link>
       </ListItem>  
       <ListItem className={classes.listItem}>
-        <Button
-          href="/news"
+        <Link
+          to="/news"
           color="transparent"
           className={classes.navLink}
-        ><Info/>NEWS
+        ><Info style = {{ fontSize:"1.2rem"}}/>&nbsp;NEWS
           {/* <CloudDownload className={classes.icons} /> Download */}
-        </Button>
+        </Link>
       </ListItem>  
       <ListItem className={classes.listItem}>
-        <Button
-          href="/login"
+        <Link
+          to="/login"
           color="transparent"
           className={classes.navLink}
-        ><Keyboard/>LOGIN
+        ><Keyboard style = {{ fontSize:"1.2rem"}}/>&nbsp;LOGIN
           {/* <CloudDownload className={classes.icons} /> Download */}
-        </Button>
+        </Link>
       </ListItem>
       <ListItem className={classes.listItem}>
-      <Button
+      <Link
           color="transparent"
           className={classes.navLink}
           onClick = {signOutHandler}
-        ><Keyboard/>LOGOUT
+        ><Keyboard style = {{ fontSize:"1.2rem"}}/>&nbsp;LOGOUT
           {/* <CloudDownload className={classes.icons} /> Download */}
-        </Button>
+        </Link>
       </ListItem>      
     </List>
   );
