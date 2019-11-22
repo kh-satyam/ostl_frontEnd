@@ -19,6 +19,9 @@ import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
+import cookie from 'react-cookies';
+import { createBrowserHistory } from "history";
+
 import { People,LibraryBooks,LaptopChromebook,AttachFile,ContactMail,
   Keyboard,Home,Help,Info } from "@material-ui/icons";
 
@@ -26,6 +29,13 @@ const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
   const classes = useStyles();
+  const hist = createBrowserHistory();
+  const signOutHandler = () => {
+    cookie.remove('ostlCookie',{path : '/'});
+    hist.push("/");
+  }
+
+
   return (
     <List className={classes.list}>
       {/* <ListItem className={classes.listItem}>
@@ -53,10 +63,9 @@ export default function HeaderLinks(props) {
       </ListItem> */}
       <ListItem className={classes.listItem}>
         <Button
-          href="https://www.creative-tim.com/product/material-kit-react?ref=mkr-navbar"
           color="transparent"
-          target="_blank"
           className={classes.navLink}
+          onClick = {signOutHandler}
         ><Keyboard/>LOGOUT
           {/* <CloudDownload className={classes.icons} /> Download */}
         </Button>
