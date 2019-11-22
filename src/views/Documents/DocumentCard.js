@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
@@ -10,6 +10,7 @@ import {
   cardSubtitle
 } from "assets/jss/material-kit-react.js";
 import PropTypes from "prop-types";
+import Muted from "components/Typography/Muted";
 
 const styles = {
   cardTitle,
@@ -25,17 +26,12 @@ const styles = {
 const useStyles = makeStyles(styles);
 
 const DocumentCard = props => {
-  const [expand, setExpand] = useState(false);
-
-  const toggle = () => {
-    setExpand(!expand);
-  };
-
   const classes = useStyles();
 
   const {
     id,
     title,
+    author,
     description,
     date,
     link,
@@ -50,11 +46,25 @@ const DocumentCard = props => {
       <Link to={url}>
         <CardBody>
           <h4 className={classes.cardTitle}>{title}</h4>
-          {
+          <Muted>
             <h5 className={classes.cardSubtitle}>
-              {description}, {documentType}, {link}
+              <i className={"fa fa-user"}>
+                &nbsp;
+                {author}
+                &nbsp;&nbsp;&nbsp;
+              </i>
+              <i className={"fa fa-calendar"}>
+                &nbsp;
+                {date !== undefined ? new Date(date).toDateString() : null}
+                {/* &nbsp;&nbsp;&nbsp; */}
+              </i>
+              {/* <i className={"fa fa-folder-open"}>
+              &nbsp;
+              {documentType}
+              &nbsp;&nbsp;&nbsp;
+            </i> */}
             </h5>
-          }
+          </Muted>
         </CardBody>
       </Link>
     );
@@ -62,11 +72,7 @@ const DocumentCard = props => {
 
   return (
     <Card>
-      {!expand ? (
-        <CardActionArea onClick={toggle}> {cardBody()} </CardActionArea>
-      ) : (
-        cardBody()
-      )}
+      <CardActionArea> {cardBody()} </CardActionArea>
     </Card>
   );
 };
@@ -76,6 +82,7 @@ export default DocumentCard;
 DocumentCard.propTypes = {
   id: PropTypes.number,
   title: PropTypes.string,
+  author: PropTypes.string,
   description: PropTypes.string,
   date: PropTypes.string,
   link: PropTypes.string,

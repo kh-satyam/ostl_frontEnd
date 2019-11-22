@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 
 const DOCUMENT_LIST_BY_TYPE_URL = "https://localhost:8086/document/byType/";
 const jwt =
-  "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWdtZWV0Nzg3QGdtYWlsLmNvbSIsImV4cCI6MTU3NDI4MzUzNiwiaWF0IjoxNTc0MjY1NTM2fQ.At6-i9lXmJPKYwVklpWQC7B2WDjE8Mp4mje74IXimQJXKoRABVqXuifetJ42oJDIy0efvbITt40TKdJDumI49g";
+  "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWdtZWV0Nzg3QGdtYWlsLmNvbSIsImV4cCI6MTU3NDM4NTYxMSwiaWF0IjoxNTc0MzY3NjExfQ.8YhIL5aAoM5Oe2d4F2kKwKQ7Cv7F62sZNGjf2a7xlVY2H8Pbb4hCTOM-qk6QPFEZx0MATpOeE0dpTvJcN4fWnQ";
 const config = {
   headers: {
     Authorization: "Bearer " + jwt
@@ -31,7 +31,6 @@ const DocumentList = props => {
     };
     fetchDocuments();
   }, []);
-  console.log(data);
   return (
     <GridContainer
       style={{
@@ -43,6 +42,7 @@ const DocumentList = props => {
           <DocumentCard
             id={document.id}
             title={document.title}
+            author={document.author}
             description={document.description}
             date={document.date}
             link={document.link}

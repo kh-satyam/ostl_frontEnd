@@ -51,15 +51,14 @@ export default function HeaderLinks(props) {
           ]}
         />
       </ListItem> */}
-      <ListItem className={classes.listItem}>
+      {/* <ListItem className={classes.listItem}>
         <Button
           href="/"
           color="transparent"
           className={classes.navLink } 
         ><Home/>HOME
-          {/* <CloudDownload className={classes.icons} /> Download */}
         </Button>
-      </ListItem>
+      </ListItem> */}
       <ListItem className={classes.listItem}>
         <Button
           href="/members"
