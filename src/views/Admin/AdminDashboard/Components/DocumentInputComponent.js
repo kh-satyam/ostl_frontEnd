@@ -8,7 +8,6 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import CustomDropdown from 'components/CustomDropdown/CustomDropdown.js';
 import Button from "components/CustomButtons/Button.js";
 import Axios from "axios";
-import {connect} from "react-redux";
 import cookie from 'react-cookies'
 
 import { createBrowserHistory } from "history";
@@ -32,7 +31,7 @@ class DocumentInputComponent extends Component {
         this.state = { docType: "Thesis", title: "", docLinks: "", description: "", file: null };
     }
 
-    hist = createBrowserHistory();
+    
 
     setDocType(data) {
         this.setState({ docType: data });
@@ -64,54 +63,63 @@ class DocumentInputComponent extends Component {
 
     }
     addDocument() {
-        console.log("addDocument");
-        var value = cookie.load('token');
-        console.log("cookie" + " "+ value);
-        // console.log(this.props.token);
-        // console.log("add Document");
-        // console.log(this.props);
-        // var docType = this.state.docType;
-        // var docTitle = this.state.title;
-        // var docLinks = this.state.docLinks;
-        // var docDescription = this.state.description;
-        // var docFile = this.state.file;
-        // if (docTitle === "") {
-        //     alert("Document Title cannot be empty");
-        // }
-        // else if (docDescription === "") {
-        //     alert("Document description cannot be empty")
-        // } else {
-        //     console.log("API called");
-        //     var docData = {
-        //         title: docTitle,
-        //         dt: docType,
-        //         description: docDescription,
-        //         link: docLinks
-        //     };
-        //     console.log(docData);
-        //     var formData = new FormData();
-        //     formData.set("formData", JSON.stringify(docData));
-        //     formData.append("file", docFile);
-        //     console.log(formData);
-        //     Axios({
-        //         method: 'post',
-        //         url: 'http://localhost:8086/document',
-        //         data: formData,
-        //         headers: {
-        //             'Content-Type': 'multipart/form-data',
-        //             'Authorization': 'Bearer ' + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYmhheUBnbWFpbC5jb20iLCJleHAiOjE1NzQyODIxNjcs" +
-        //                 "ImlhdCI6MTU3NDI2NDE2N30.XONE7aIIrPBV1bDFcd4zNjK9yL5OlvHwUUYD3ogTpFT6RsQuBhSMXj5WBymAuuQO-uxcbn63uZzOlyR8qHn9vA"
-        //         }
-        //     })
-        //         .then(function (response) {
-        //             //handle success
-        //             console.log(response);
-        //         })
-        //         .catch(function (response) {
-        //             //handle error
-        //             console.log(response);
-        //         });
-        // }
+
+        var ostlcookie = cookie.load('ostlCookie');
+        let protocol = ostlcookie['protocol'];
+        let domain = ostlcookie['domain'];
+        var docType = this.state.docType;
+        var docTitle = this.state.title;
+        var docLinks = this.state.docLinks;
+        var docDescription = this.state.description;
+        var docFile = this.state.file;
+        let date = new Date();
+        let docDate = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDay();
+        if (docTitle === "") {
+            alert("Document Title cannot be empty");
+        }
+        else if (docDescription === "") {
+            alert("Document description cannot be empty")
+        } else {
+            
+            var docData = {
+                title: docTitle,
+                dt: docType,
+                description: docDescription,
+                link: docLinks,
+                date: docDate
+            };
+            console.log(docData);
+            var formData = new FormData();
+            formData.set("formData", JSON.stringify(docData));
+            formData.append("file", docFile);
+            let url = protocol+"://"+domain+"/document";
+            
+            Axios({
+                method: 'post',
+                url: url,
+                data: formData,
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': 'Bearer ' + ostlcookie.token
+                }
+            })
+                .then(function (success) {
+                    //handle success
+                    alert("Document Added");
+                })
+                .catch(function (error) {
+                    //handle error
+                    let errorStatusCode = error.response.status;
+                    console.log(errorStatusCode+ " "+error);
+                    if(errorStatusCode===401) {
+                        alert("Login Again");
+                        cookie.remove('ostlCookie',{path : '/'});
+                        //this.hist.push("/admin");
+                    }else{
+                        alert("Document cannot be uploaded.Please try again");
+                    }
+                });
+        }
     }
 
     // console.log("data:", value);
@@ -173,7 +181,7 @@ class DocumentInputComponent extends Component {
                             Upload Project Files
                             <input
                                 type="file"
-                                onChange={(event) => this.props.addToken("data")}
+                                onChange={(event) => this.fileHandler(event) }
                                 style={{ display: "none" }}
                             />
                         </Button>
