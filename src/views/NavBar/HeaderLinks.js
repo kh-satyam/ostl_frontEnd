@@ -18,6 +18,8 @@ import { Apps, CloudDownload } from "@material-ui/icons";
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
 
+import { createBrowserHistory } from "history";
+
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
 import { People,LibraryBooks,LaptopChromebook,AttachFile,ContactMail,
   Keyboard,Home,Help,Info } from "@material-ui/icons";
@@ -26,6 +28,14 @@ const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
   const classes = useStyles();
+
+  const hist = createBrowserHistory();
+  const signOutHandler = () => {
+    cookie.remove('ostlCookie',{path : '/'});
+    hist.push("/");
+  }
+
+
   return (
     <List className={classes.list}>
       {/* <ListItem className={classes.listItem}>
@@ -119,6 +129,15 @@ export default function HeaderLinks(props) {
           color="transparent"
           className={classes.navLink}
         ><Keyboard/>LOGIN
+          {/* <CloudDownload className={classes.icons} /> Download */}
+        </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+      <Button
+          color="transparent"
+          className={classes.navLink}
+          onClick = {signOutHandler}
+        ><Keyboard/>LOGOUT
           {/* <CloudDownload className={classes.icons} /> Download */}
         </Button>
       </ListItem>      
