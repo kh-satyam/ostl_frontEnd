@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -14,20 +14,57 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
-
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
-
+import { createBrowserHistory } from "history";
+// import {connect} from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
+import cookie from 'react-cookies';
+import axios from 'axios';
 import image from "assets/img/bg7.jpg";
 
 const useStyles = makeStyles(styles);
 
-export default function LoginPage(props) {
+
+
+const LoginPage = (props) => {
+
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
-  setTimeout(function() {
+  setTimeout(function () {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const hist = createBrowserHistory();
+
+  const signInHandler = () => {
+
+    if(email === "") {
+      alert("email cannot be empty");
+    }
+    else if(password === "") {
+      alert("password cannot be empty")
+    }
+    else{
+      axios.post('http://localhost:8086/authenticate', {
+      "password": password,
+      "userName": email
+      }).then((response) => {
+      console.log(response);
+      var ostlCookie = {};
+      ostlCookie['token'] = response.data.token;
+      ostlCookie['protocol'] = "http";
+      ostlCookie['domain'] = 'localhost:8086';
+      cookie.save("ostlCookie",JSON.stringify(ostlCookie), { path: '/' });
+      hist.push("/");
+      })
+      .catch(function (error) {
+        console.log(error);
+        alert("Invalid Credentials");
+      });
+    }
+  }
   return (
     <div>
       {/* <Header
@@ -109,12 +146,14 @@ export default function LoginPage(props) {
                         fullWidth: true
                       }}
                       inputProps={{
+                        defaultValue : email,
                         type: "email",
                         endAdornment: (
                           <InputAdornment position="end">
                             <Email className={classes.inputIconsColor} />
                           </InputAdornment>
-                        )
+                        ),
+                        onChange: (event) => setEmail(event.target.value)
                       }}
                     />
                     <CustomInput
@@ -125,6 +164,7 @@ export default function LoginPage(props) {
                         fullWidth: true
                       }}
                       inputProps={{
+                        defaultValue : password,
                         type: "password",
                         endAdornment: (
                           <InputAdornment position="end">
@@ -133,12 +173,13 @@ export default function LoginPage(props) {
                             </Icon>
                           </InputAdornment>
                         ),
+                        onChange: (event) => setPassword(event.target.value),
                         autoComplete: "off"
                       }}
                     />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button color="success" size="lg" onClick={props.signIn}>
+                    <Button color="success" size="lg" onClick={signInHandler}>
                       Sign In
                     </Button>
                   </CardFooter>
@@ -151,4 +192,19 @@ export default function LoginPage(props) {
       </div>
     </div>
   );
-}
+};
+
+
+// const mapStateToProps = state => {
+//   return {
+//     token:state.token
+//   };
+// };
+
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     addToken: () => dispatch({type:"ADD_BEARER_TOKEN",payload:"random"})
+//   };
+// };
+
+export default LoginPage;
