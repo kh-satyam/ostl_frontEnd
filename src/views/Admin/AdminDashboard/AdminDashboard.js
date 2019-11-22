@@ -50,6 +50,7 @@ class AdminDashboard extends Component {
       "password": authenticationDetails.password,
       "userName": authenticationDetails.userName
       }).then((response) => {
+        console.log("Logged in ");
         let ostlCookie = {};
         ostlCookie['token'] = response.data.token;
         ostlCookie['protocol'] = "http";
@@ -65,7 +66,6 @@ class AdminDashboard extends Component {
   }
 
   render() {
-    console.log(this.state.authenticated);
     let components;
     if(this.state.authenticated) {
       console.log(" strue");
@@ -104,7 +104,6 @@ class AdminDashboard extends Component {
       />
     </div>;
     }else{
-      console.log("s false");
       components = <LoginComponent signInHandler={this.signInHandler} />;
     }
     return (

@@ -73,7 +73,8 @@ class DocumentInputComponent extends Component {
         var docDescription = this.state.description;
         var docFile = this.state.file;
         let date = new Date();
-        let docDate = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDay();
+        let docMonth = date.getUTCMonth()+1;
+        let docDate = date.getUTCFullYear()+"-"+docMonth+"-"+date.getUTCDate();
         if (docTitle === "") {
             alert("Document Title cannot be empty");
         }
