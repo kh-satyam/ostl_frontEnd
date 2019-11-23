@@ -18,6 +18,7 @@ import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
 
 import { createBrowserHistory } from "history";
+import cookie from 'react-cookies';
 
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
 import { People,LibraryBooks,LaptopChromebook,AttachFile,ContactMail,
