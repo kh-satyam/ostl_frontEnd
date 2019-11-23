@@ -47,17 +47,18 @@ const LoginPage = (props) => {
       alert("password cannot be empty")
     }
     else{
+      let authenticationDetails = {userName : email,password:password};
       axios.post('http://localhost:8086/authenticate', {
-      "password": password,
-      "userName": email
+      "password": authenticationDetails.password,
+      "userName": authenticationDetails.userName
       }).then((response) => {
-      console.log(response);
-      var ostlCookie = {};
-      ostlCookie['token'] = response.data.token;
-      ostlCookie['protocol'] = "http";
-      ostlCookie['domain'] = 'localhost:8086';
-      cookie.save("ostlCookie",JSON.stringify(ostlCookie), { path: '/' });
-      hist.push("/");
+        console.log("Logged in ");
+        let ostlCookie = {};
+        ostlCookie['token'] = response.data.token;
+        ostlCookie['protocol'] = "http";
+        ostlCookie['domain'] = 'localhost:8086';
+        cookie.save("ostlCookie",JSON.stringify(ostlCookie), { path: '/' });
+        //this.hist.push('/admin');
       })
       .catch(function (error) {
         console.log(error);
