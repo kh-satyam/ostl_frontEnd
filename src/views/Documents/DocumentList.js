@@ -4,6 +4,10 @@ import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem.js";
 import axios from "axios";
 import PropTypes from "prop-types";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Card from "components/Card/Card.js";
+import CardBody from "components/Card/CardBody.js";
+import CardHeader from "components/Card/CardHeader.js";
 
 const DOCUMENT_LIST_BY_TYPE_URL = "https://localhost:8086/document/byType/";
 const jwt =
@@ -13,25 +17,42 @@ const config = {
     Authorization: "Bearer " + jwt
   }
 };
+
 const DocumentList = props => {
   const [data, setData] = useState({ documents: [], isFetching: true });
-  useEffect(() => {
-    const fetchDocuments = async () => {
-      try {
-        // setData({ documents: data.documents, isFetching: true });
-        const response = await axios.get(
-          DOCUMENT_LIST_BY_TYPE_URL + props.type,
-          config
-        );
-        setData({ documents: response.data, isFetching: false });
-      } catch (e) {
-        console.log(e);
-        setData({ documents: data.documents, isFetching: false });
-      }
-    };
-    fetchDocuments();
-  }, []);
-  return (
+
+  const loading = () => (
+    <div
+      style={{
+        position: "fixed",
+        top: "45%",
+        left: "45%"
+      }}
+    >
+      <CircularProgress style={{ marginLeft: "5px" }} disableShrink />;
+      <br />
+      Loading...
+    </div>
+  );
+
+  const emptyList = () => (
+    <div
+      style={{
+        position: "fixed",
+        top: "30%",
+        left: "40%",
+        maxWidth: "500px",
+        textAlign: "center"
+      }}
+    >
+      <Card>
+        <CardHeader color="warning">No Documents</CardHeader>
+        <CardBody>No documents available to list.</CardBody>
+      </Card>
+    </div>
+  );
+
+  const documentCards = () => (
     <GridContainer
       style={{
         margin: "100px"
@@ -54,6 +75,29 @@ const DocumentList = props => {
       ))}
     </GridContainer>
   );
+
+  useEffect(() => {
+    const fetchDocuments = async () => {
+      try {
+        // setData({ documents: data.documents, isFetching: true });
+        const response = await axios.get(
+          DOCUMENT_LIST_BY_TYPE_URL + props.type,
+          config
+        );
+        setData({ documents: response.data, isFetching: false });
+      } catch (e) {
+        console.log(e);
+        setData({ documents: data.documents, isFetching: false });
+      }
+    };
+    fetchDocuments();
+  }, []);
+
+  return data.isFetching
+    ? loading()
+    : data.documents.length == 0
+    ? emptyList()
+    : documentCards();
 };
 
 export default DocumentList;
