@@ -9,9 +9,7 @@ import LoginPage from "views/LoginPage/LoginPage.js";
 import DocumentList from "views/Documents/DocumentList.js";
 import DocumentView from "views/Documents/DocumentView.js";
 import AdminDashBoard from "views/Admin/AdminDashboard/AdminDashboard.js";
-import axios from 'axios';
-import cookie from 'react-cookies';
-import https from 'https';
+import Members from "views/Members/Members.js";
 
 export class App extends Component {
   hist = createBrowserHistory();
@@ -30,12 +28,9 @@ export class App extends Component {
       <div>
         <Router history={this.hist}>
           <NavBar />
-          <Route
-            exact
-            path="/login"
-            component={() => <LoginPage />}
-          />
+          <Route exact path="/login" component={() => <LoginPage />} />
           <Route path="/admin" component={AdminDashBoard} />
+          <Route path="/members" component={Members} />
           <Route
             path="/publications"
             component={() => <DocumentList type="Publication" />}
@@ -61,7 +56,6 @@ export class App extends Component {
   }
 }
 
-
 // const mapStateToProps = state => {
 //   return {
 //     token:state.token
@@ -73,6 +67,5 @@ export class App extends Component {
 //     addToken: (token) => dispatch({type:"ADD_BEARER_TOKEN",payload:token})
 //   };
 // };
-
 
 export default App;
