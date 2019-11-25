@@ -5,6 +5,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
 import Email from "@material-ui/icons/Email";
+import { Redirect } from "react-router-dom";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -15,66 +16,53 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
-import { createBrowserHistory } from "history";
-// import {connect} from "react-redux";
-// import { useDispatch, useSelector } from "react-redux";
-import cookie from 'react-cookies';
-import axios from 'axios';
+import cookie from "react-cookies";
+import axios from "axios";
 import image from "assets/img/bg7.jpg";
 
 const useStyles = makeStyles(styles);
 
-
-
-const LoginPage = (props) => {
-
+const LoginPage = props => {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
-  setTimeout(function () {
+  setTimeout(function() {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
-  const { ...rest } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const hist = createBrowserHistory();
+  const [redirect, setRedirect] = useState(false);
 
   const signInHandler = () => {
-
-    if(email === "") {
+    if (email === "") {
       alert("email cannot be empty");
+    } else if (password === "") {
+      alert("password cannot be empty");
+    } else {
+      let authenticationDetails = { userName: email, password: password };
+      axios
+        .post("https://localhost:8086/authenticate", {
+          password: authenticationDetails.password,
+          userName: authenticationDetails.userName
+        })
+        .then(response => {
+          console.log("Logged in ");
+          let ostlCookie = {};
+          ostlCookie["token"] = response.data.token;
+          ostlCookie["protocol"] = "https";
+          ostlCookie["domain"] = "localhost:8086";
+          cookie.save("ostlCookie", JSON.stringify(ostlCookie), { path: "/" });
+          setRedirect(true);
+        })
+        .catch(function(error) {
+          console.log(error);
+          alert("Invalid Credentials");
+        });
     }
-    else if(password === "") {
-      alert("password cannot be empty")
-    }
-    else{
-      let authenticationDetails = {userName : email,password:password};
-      axios.post('http://localhost:8086/authenticate', {
-      "password": authenticationDetails.password,
-      "userName": authenticationDetails.userName
-      }).then((response) => {
-        console.log("Logged in ");
-        let ostlCookie = {};
-        ostlCookie['token'] = response.data.token;
-        ostlCookie['protocol'] = "http";
-        ostlCookie['domain'] = 'localhost:8086';
-        cookie.save("ostlCookie",JSON.stringify(ostlCookie), { path: '/' });
-        //this.hist.push('/admin');
-      })
-      .catch(function (error) {
-        console.log(error);
-        alert("Invalid Credentials");
-      });
-    }
-  }
-  return (
+  };
+  return redirect ? (
+    <Redirect to="/" />
+  ) : (
     <div>
-      {/* <Header
-        absolute
-        color="transparent"
-        brand="Material Kit React"
-        rightLinks={<HeaderLinks />}
-        {...rest}
-      /> */}
       <div
         className={classes.pageHeader}
         style={{
@@ -91,54 +79,11 @@ const LoginPage = (props) => {
                   <a href="/signup-page">
                     <CardHeader color="success" className={classes.cardHeader}>
                       <h4>Click to Register</h4>
-                      <div className={classes.socialLine}>
-                        {/* <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-twitter"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-facebook"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-google-plus-g"} />
-                      </Button> */}
-                      </div>
+                      <div className={classes.socialLine}></div>
                     </CardHeader>
                   </a>
                   <p className={classes.divider}>Enter your Credentials</p>
                   <CardBody>
-                    {/* <CustomInput
-                      labelText="First Name..."
-                      id="first"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: "text",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <People className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        )
-                      }}
-                    /> */}
                     <CustomInput
                       labelText="Email..."
                       id="email"
@@ -147,14 +92,14 @@ const LoginPage = (props) => {
                         fullWidth: true
                       }}
                       inputProps={{
-                        defaultValue : email,
+                        defaultValue: email,
                         type: "email",
                         endAdornment: (
                           <InputAdornment position="end">
                             <Email className={classes.inputIconsColor} />
                           </InputAdornment>
                         ),
-                        onChange: (event) => setEmail(event.target.value)
+                        onChange: event => setEmail(event.target.value)
                       }}
                     />
                     <CustomInput
@@ -165,7 +110,7 @@ const LoginPage = (props) => {
                         fullWidth: true
                       }}
                       inputProps={{
-                        defaultValue : password,
+                        defaultValue: password,
                         type: "password",
                         endAdornment: (
                           <InputAdornment position="end">
@@ -174,7 +119,7 @@ const LoginPage = (props) => {
                             </Icon>
                           </InputAdornment>
                         ),
-                        onChange: (event) => setPassword(event.target.value),
+                        onChange: event => setPassword(event.target.value),
                         autoComplete: "off"
                       }}
                     />
@@ -189,23 +134,8 @@ const LoginPage = (props) => {
             </GridItem>
           </GridContainer>
         </div>
-        {/* <Footer whiteFont /> */}
       </div>
     </div>
   );
 };
-
-
-// const mapStateToProps = state => {
-//   return {
-//     token:state.token
-//   };
-// };
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     addToken: () => dispatch({type:"ADD_BEARER_TOKEN",payload:"random"})
-//   };
-// };
-
 export default LoginPage;

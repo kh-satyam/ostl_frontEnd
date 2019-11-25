@@ -9,14 +9,7 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 
-const DOCUMENT_LIST_BY_TYPE_URL = "https://localhost:8086/document/byType/";
-const jwt =
-  "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWdtZWV0Nzg3QGdtYWlsLmNvbSIsImV4cCI6MTU3NDM4NTYxMSwiaWF0IjoxNTc0MzY3NjExfQ.8YhIL5aAoM5Oe2d4F2kKwKQ7Cv7F62sZNGjf2a7xlVY2H8Pbb4hCTOM-qk6QPFEZx0MATpOeE0dpTvJcN4fWnQ";
-const config = {
-  headers: {
-    Authorization: "Bearer " + jwt
-  }
-};
+const URL = "https://localhost:8086/document/listing/";
 
 const DocumentList = props => {
   const [data, setData] = useState({ documents: [], isFetching: true });
@@ -80,10 +73,7 @@ const DocumentList = props => {
     const fetchDocuments = async () => {
       try {
         // setData({ documents: data.documents, isFetching: true });
-        const response = await axios.get(
-          DOCUMENT_LIST_BY_TYPE_URL + props.type,
-          config
-        );
+        const response = await axios.get(URL + props.type);
         setData({ documents: response.data, isFetching: false });
       } catch (e) {
         console.log(e);

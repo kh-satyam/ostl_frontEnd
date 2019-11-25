@@ -1,13 +1,9 @@
-import { createBrowserHistory } from "history";
-
 import React from "react";
 import Header from "./Header.js";
 import HeaderLinks from "./HeaderLinks.js";
 
 const NavBar = () => {
-  var hist = createBrowserHistory();
   const dashboardRoutes = [];
-
   return (
     <Header
       color="dark"
