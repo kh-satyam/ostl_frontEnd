@@ -29,6 +29,7 @@ class DocumentInputComponent extends Component {
     constructor(props) {
         super(props);
         this.state = { docType: "Thesis", title: "", docLinks: "", description: "", file: null };
+        
     }
 
     
@@ -56,7 +57,7 @@ class DocumentInputComponent extends Component {
 
 
     componentDidMount() {
-        
+
     }
 
     checkDocumentFieldAreNotEmpty() {
@@ -64,9 +65,9 @@ class DocumentInputComponent extends Component {
     }
     addDocument() {
 
-        var ostlcookie = cookie.load('ostlCookie');
-        let protocol = ostlcookie['protocol'];
-        let domain = ostlcookie['domain'];
+        var ostlCookie = this.props.ostlCookie;
+        let protocol = ostlCookie['protocol'];
+        let domain = ostlCookie['domain'];
         var docType = this.state.docType;
         var docTitle = this.state.title;
         var docLinks = this.state.docLinks;
@@ -89,7 +90,7 @@ class DocumentInputComponent extends Component {
                 link: docLinks,
                 date: docDate
             };
-            console.log(docData);
+            console.log(JSON.stringify(docData));
             var formData = new FormData();
             formData.set("formData", JSON.stringify(docData));
             formData.append("file", docFile);
@@ -101,7 +102,7 @@ class DocumentInputComponent extends Component {
                 data: formData,
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                    'Authorization': 'Bearer ' + ostlcookie.token
+                    'Authorization': 'Bearer ' + ostlCookie['token']
                 }
             })
                 .then(function (success) {
@@ -110,7 +111,9 @@ class DocumentInputComponent extends Component {
                 })
                 .catch(function (error) {
                     //handle error
+                    console.log(Object.keys(error));
                     let errorStatusCode = error.response.status;
+                    console.log(error.response);
                     console.log(errorStatusCode+ " "+error);
                     if(errorStatusCode===401) {
                         alert("Login Again");
