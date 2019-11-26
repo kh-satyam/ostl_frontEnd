@@ -36,7 +36,7 @@ const DocumentCard = props => {
   const [expand, setExpand] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [formData, setFormData] = useState({
-    'id': props.id, 'dt': props.type, 'title': props.title,
+    'id': props.id, 'dt': props.documentType, 'title': props.title,
     'description': props.description, 'link': props.link,
     author:props.author
   });
@@ -108,6 +108,7 @@ const DocumentCard = props => {
       .then(function (success) {
         //handle success
         alert("Document Updated");
+        window.location.reload();
       })
       .catch(function (error) {
         //handle error
@@ -144,6 +145,7 @@ const DocumentCard = props => {
       .then(function (success) {
         //handle success
         alert("Document Deleted");
+        window.location.reload();
       })
       .catch(function (error) {
         //handle error
@@ -188,6 +190,7 @@ const DocumentCard = props => {
   } = props;
 
   const cardBody = () => {
+    console.log(formData['dt']);
     return (
       <CardBody>
         <h4 className={classes.cardTitle}>{title}</h4>
@@ -200,7 +203,7 @@ const DocumentCard = props => {
               <GridContainer>
                 <GridItem xs={12} sm={12} md={3}>
                   <CustomDropdown
-                    buttonText={documentType}
+                    buttonText={formData['dt']}
                     dropdownList={[
                       "Thesis",
                       "corporateCollaboration",

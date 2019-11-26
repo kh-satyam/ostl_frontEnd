@@ -111,6 +111,7 @@ class DocumentInputComponent extends Component {
         .then(function(success) {
           //handle success
           alert("Document Added");
+          window.location.reload();
         })
         .catch(function(error) {
           //handle error

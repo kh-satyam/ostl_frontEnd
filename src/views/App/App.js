@@ -9,6 +9,7 @@ import DocumentList from "views/Documents/DocumentList.js";
 import DocumentView from "views/Documents/DocumentView.js";
 import AdminDashBoard from "views/Admin/AdminDashboard/AdminDashboard.js";
 import Members from "views/Members/Members.js";
+import News from "views/News/News.js";
 
 export class App extends Component {
   hist = createBrowserHistory();
@@ -39,6 +40,7 @@ export class App extends Component {
           />
           <Route path="/document/:id" component={DocumentView} />
           <Route path="/profile-page" component={ProfilePage} />
+          <Route path="/news" component={News} />
           <Route exact path="/" component={LandingPage} />
         </Router>
       </div>

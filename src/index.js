@@ -13,8 +13,13 @@ import ProfilePage from "views/ProfilePage/ProfilePage.js";
 import LoginPage from "views/LoginPage/LoginPage.js";
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
+import { createStore } from 'redux';
+import reducer from "./views/reduxStore/reducer";
+import { Provider } from 'react-redux';
 var hist = createBrowserHistory();
 const dashboardRoutes = [];
+
+// const store = createStore(reducer);
 
 // ReactDOM.render(
 //   <Router history={hist}>

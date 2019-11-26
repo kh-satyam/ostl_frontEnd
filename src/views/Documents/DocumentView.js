@@ -112,139 +112,139 @@ const DocumentView = props => {
     };
     fetchDocument();
   }, []);
-
+  const pdfURL = "http://localhost:8887/document_" + documentId + ".pdf";
   return !authenticated ? (
     loginToView()
   ) : (
-    <GridContainer
-      style={{
-        margin: "100px",
-        background: "white"
-      }}
-      className={classNames(classes.main, classes.mainRaised)}
-    >
-      <GridItem style={{ margin: "20px" }}>
-        <Tooltip
-          id="tooltip-bottom-author"
-          title="Title"
-          placement="bottom"
-          classes={{ tooltip: tooltipClasses.tooltip }}
-        >
-          <h2>{data.document.title}</h2>
-        </Tooltip>
-        <div>
-          <Muted>
-            <Tooltip
-              id="tooltip-bottom-author"
-              title="Author(s)"
-              placement="bottom"
-              classes={{ tooltip: tooltipClasses.tooltip }}
-            >
-              <i className={"fa fa-user"}>
-                &nbsp;
-                {data.document.author}
-                &nbsp;&nbsp;&nbsp;
-              </i>
-            </Tooltip>
-            <Tooltip
-              id="tooltip-bottom-published-on"
-              title="Published On"
-              placement="bottom"
-              classes={{ tooltip: tooltipClasses.tooltip }}
-            >
-              <i className={"fa fa-calendar"}>
-                &nbsp;
-                {data.document.date !== undefined
-                  ? new Date(data.document.date).toDateString()
-                  : null}
-                &nbsp;&nbsp;&nbsp;
-              </i>
-            </Tooltip>
-            <Tooltip
-              id="tooltip-bottom-dt"
-              title="Document Type"
-              placement="bottom"
-              classes={{ tooltip: tooltipClasses.tooltip }}
-            >
-              <i className={"fa fa-folder-open"}>
-                &nbsp;
-                {data.document.dt}
-                &nbsp;&nbsp;&nbsp;
-              </i>
-            </Tooltip>
-            <Tooltip
-              id="tooltip-bottom-views"
-              title="Views"
-              placement="bottom"
-              classes={{ tooltip: tooltipClasses.tooltip }}
-            >
-              <i className={"fa fa-eye"}>
-                &nbsp;
-                {data.document.viewCount}
-              </i>
-            </Tooltip>
-          </Muted>
+      data.document !== undefined ? <GridContainer
+        style={{
+          margin: "100px",
+          background: "white"
+        }}
+        className={classNames(classes.main, classes.mainRaised)}
+      >
+        <GridItem style={{ margin: "20px" }}>
           <Tooltip
             id="tooltip-bottom-author"
-            title="Description"
+            title="Title"
             placement="bottom"
             classes={{ tooltip: tooltipClasses.tooltip }}
           >
-            <p style={{ marginTop: "20px" }}>{data.document.description}</p>
+            <h2>{data.document.title}</h2>
           </Tooltip>
-        </div>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <Button color="rose" onClick={handleClickOpen}>
-            View
+          <div>
+            <Muted>
+              <Tooltip
+                id="tooltip-bottom-author"
+                title="Author(s)"
+                placement="bottom"
+                classes={{ tooltip: tooltipClasses.tooltip }}
+              >
+                <i className={"fa fa-user"}>
+                  &nbsp;
+                {data.document.author}
+                  &nbsp;&nbsp;&nbsp;
+              </i>
+              </Tooltip>
+              <Tooltip
+                id="tooltip-bottom-published-on"
+                title="Published On"
+                placement="bottom"
+                classes={{ tooltip: tooltipClasses.tooltip }}
+              >
+                <i className={"fa fa-calendar"}>
+                  &nbsp;
+                {data.document.date !== undefined
+                    ? new Date(data.document.date).toDateString()
+                    : null}
+                  &nbsp;&nbsp;&nbsp;
+              </i>
+              </Tooltip>
+              <Tooltip
+                id="tooltip-bottom-dt"
+                title="Document Type"
+                placement="bottom"
+                classes={{ tooltip: tooltipClasses.tooltip }}
+              >
+                <i className={"fa fa-folder-open"}>
+                  &nbsp;
+                {data.document.dt}
+                  &nbsp;&nbsp;&nbsp;
+              </i>
+              </Tooltip>
+              <Tooltip
+                id="tooltip-bottom-views"
+                title="Views"
+                placement="bottom"
+                classes={{ tooltip: tooltipClasses.tooltip }}
+              >
+                <i className={"fa fa-eye"}>
+                  &nbsp;
+                {data.document.viewCount}
+                </i>
+              </Tooltip>
+            </Muted>
+            <Tooltip
+              id="tooltip-bottom-author"
+              title="Description"
+              placement="bottom"
+              classes={{ tooltip: tooltipClasses.tooltip }}
+            >
+              <p style={{ marginTop: "20px" }}>{data.document.description}</p>
+            </Tooltip>
+          </div>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Button color="rose" onClick={handleClickOpen}>
+              View
           </Button>
-          &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;
           <Button color="success" onClick={handleDownload}>
-            Download
+              Download
           </Button>
-        </div>
-        <i style={{ marginTop: "20px" }} className={"fa fa-link"}>
-          &nbsp; [1] &nbsp;
+          </div>
+          <i style={{ marginTop: "20px" }} className={"fa fa-link"}>
+            &nbsp; [1] &nbsp;
           <a href={data.document.link} target="_blank">
-            {data.document.link}
-          </a>
-        </i>
-      </GridItem>
+              {data.document.link}
+            </a>
+          </i>
+        </GridItem>
 
-      <Dialog
-        fullScreen
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {data.document.title}
-          <IconButton
-            aria-label="close"
-            className={classes.closeButton}
-            onClick={handleClose}
-          >
-            <CloseIcon />
-          </IconButton>
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            <object
-              width="100%"
-              height="1024px"
-              data="http://example.com/sample.pdf"
-              type="application/pdf"
-            ></object>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="danger">
-            Close
+        <Dialog
+          fullScreen
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {data.document.title}
+            <IconButton
+              aria-label="close"
+              className={classes.closeButton}
+              onClick={handleClose}
+            >
+              <CloseIcon />
+            </IconButton>
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              <object
+                width="100%"
+                height="1024px"
+                data={pdfURL}
+                type="application/pdf"
+              ></object>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="danger">
+              Close
           </Button>
-        </DialogActions>
-      </Dialog>
-    </GridContainer>
-  );
+          </DialogActions>
+        </Dialog>
+      </GridContainer> : <h4 style={{marginTop : "100px"}}>Server Error. Please check later.</h4>
+    );
 };
 
 export default DocumentView;
