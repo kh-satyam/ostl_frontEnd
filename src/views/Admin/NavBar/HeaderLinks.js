@@ -19,22 +19,33 @@ import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
-import cookie from 'react-cookies';
+import cookies from "react-cookies";
 import { createBrowserHistory } from "history";
 
-import { People,LibraryBooks,LaptopChromebook,AttachFile,ContactMail,
-  Keyboard,Home,Help,Info } from "@material-ui/icons";
+import {
+  People,
+  LibraryBooks,
+  LaptopChromebook,
+  AttachFile,
+  ContactMail,
+  Keyboard,
+  Home,
+  Help,
+  Info
+} from "@material-ui/icons";
 
 const useStyles = makeStyles(styles);
+
+const ostlCookie = cookies.load("ostlCookie");
+const authenticated = ostlCookie !== undefined && ostlCookie["token"] !== "";
 
 export default function HeaderLinks(props) {
   const classes = useStyles();
   const hist = createBrowserHistory();
   const signOutHandler = () => {
-    cookie.remove('ostlCookie',{path : '/'});
-    hist.push("/");
-  }
-
+    cookies.remove("ostlCookie", { path: "/" });
+    window.location.reload();
+  };
 
   return (
     <List className={classes.list}>
@@ -61,15 +72,19 @@ export default function HeaderLinks(props) {
           ]}
         />
       </ListItem> */}
-      <ListItem className={classes.listItem}>
-        <Button
-          color="transparent"
-          className={classes.navLink}
-          onClick = {signOutHandler}
-        ><Keyboard/>LOGOUT
-          {/* <CloudDownload className={classes.icons} /> Download */}
-        </Button>
-      </ListItem>      
+      {authenticated && (
+        <ListItem className={classes.listItem}>
+          <Button
+            color="transparent"
+            className={classes.navLink}
+            onClick={signOutHandler}
+          >
+            <Keyboard />
+            LOGOUT
+            {/* <CloudDownload className={classes.icons} /> Download */}
+          </Button>
+        </ListItem>
+      )}
     </List>
   );
 }

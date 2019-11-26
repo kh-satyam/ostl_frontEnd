@@ -18,12 +18,13 @@ import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import { createBrowserHistory } from "history";
 // import {connect} from "react-redux";
 // import { useDispatch, useSelector } from "react-redux";
-import cookie from 'react-cookies';
+import cookies from 'react-cookies';
 import axios from 'axios';
 import image from "assets/img/bg7.jpg";
 
 const useStyles = makeStyles(styles);
-
+const ostlCookie = cookies.load("ostlCookie");
+const authenticated = ostlCookie !== undefined && ostlCookie["token"] !== "";
 
 
 const LoginPage = (props) => {
