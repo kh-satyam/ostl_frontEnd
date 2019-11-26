@@ -9,7 +9,7 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 
-const URL = "https://localhost:8086/document/listing/";
+const URL = "http://localhost:8086/document/listing/";
 
 const DocumentList = props => {
   const [data, setData] = useState({ documents: [], isFetching: true });

@@ -11,26 +11,23 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-
+import LoginPage from "views/LoginPage/LoginPage.js";
 import classNames from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
 import tooltipStyles from "assets/jss/material-kit-react/tooltipsStyle.js";
 import Muted from "components/Typography/Muted";
+import cookies from "react-cookies";
+import Card from "components/Card/Card.js";
+import CardBody from "components/Card/CardBody.js";
+import CardHeader from "components/Card/CardHeader.js";
 
-const DOCUMENT_URL = "https://localhost:8086/document/";
-const jwt =
-  "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWdtZWV0Nzg3QGdtYWlsLmNvbSIsImV4cCI6MTU3NDM4NTYxMSwiaWF0IjoxNTc0MzY3NjExfQ.8YhIL5aAoM5Oe2d4F2kKwKQ7Cv7F62sZNGjf2a7xlVY2H8Pbb4hCTOM-qk6QPFEZx0MATpOeE0dpTvJcN4fWnQ";
-const config = {
-  headers: {
-    Authorization: "Bearer " + jwt
-  }
-};
+const ostlCookie = cookies.load("ostlCookie");
+const authenticated = ostlCookie !== undefined && ostlCookie["token"] !== "";
 
 const useStyles = makeStyles(styles);
 const useTooltipStyles = makeStyles(tooltipStyles);
-
 const DocumentView = props => {
   const [open, setOpen] = useState(false);
 
@@ -46,6 +43,46 @@ const DocumentView = props => {
     console.log("handle download");
   };
 
+  const getPDF = () => {
+    if (!authenticated) return;
+    const protocol = ostlCookie["protocol"];
+    const domain = ostlCookie["domain"];
+    const URL =
+      protocol + "://" + domain + "/document/downloadFile/" + documentId;
+    const token = ostlCookie["token"];
+    const config = {
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    };
+    try {
+      const response = axios.get(URL, config);
+      console.log(response);
+      return response.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const loginToView = () => {
+    return (
+      <div
+        style={{
+          position: "fixed",
+          top: "20%",
+          left: "40%",
+          maxWidth: "500px",
+          textAlign: "center"
+        }}
+      >
+        <Card>
+          <CardHeader color="danger">Please Login</CardHeader>
+          <CardBody>Please login to view the document.</CardBody>
+        </Card>
+      </div>
+    );
+  };
+
   const [data, setData] = useState({ document: {}, isFetching: true });
 
   const classes = useStyles();
@@ -55,8 +92,18 @@ const DocumentView = props => {
 
   useEffect(() => {
     const fetchDocument = async () => {
+      if (!authenticated) return;
+      const protocol = ostlCookie["protocol"];
+      const domain = ostlCookie["domain"];
+      const URL = protocol + "://" + domain + "/document/" + documentId;
+      const token = ostlCookie["token"];
+      const config = {
+        headers: {
+          Authorization: "Bearer " + token
+        }
+      };
       try {
-        const response = await axios.get(DOCUMENT_URL + documentId, config);
+        const response = await axios.get(URL, config);
         setData({ document: response.data, isFetching: false });
       } catch (e) {
         console.log(e);
@@ -66,9 +113,9 @@ const DocumentView = props => {
     fetchDocument();
   }, []);
 
-  console.log(data.document);
-
-  return (
+  return !authenticated ? (
+    loginToView()
+  ) : (
     <GridContainer
       style={{
         margin: "100px",
@@ -185,7 +232,7 @@ const DocumentView = props => {
             <object
               width="100%"
               height="1024px"
-              data="http://www.africau.edu/images/default/sample.pdf"
+              data="http://example.com/sample.pdf"
               type="application/pdf"
             ></object>
           </DialogContentText>

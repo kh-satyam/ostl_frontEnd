@@ -40,7 +40,7 @@ const LoginPage = props => {
     } else {
       let authenticationDetails = { userName: email, password: password };
       axios
-        .post("https://localhost:8086/authenticate", {
+        .post("http://localhost:8086/authenticate", {
           password: authenticationDetails.password,
           userName: authenticationDetails.userName
         })
@@ -48,10 +48,11 @@ const LoginPage = props => {
           console.log("Logged in ");
           let ostlCookie = {};
           ostlCookie["token"] = response.data.token;
-          ostlCookie["protocol"] = "https";
+          ostlCookie["protocol"] = "http";
           ostlCookie["domain"] = "localhost:8086";
           cookie.save("ostlCookie", JSON.stringify(ostlCookie), { path: "/" });
           setRedirect(true);
+          window.location.reload();
         })
         .catch(function(error) {
           console.log(error);

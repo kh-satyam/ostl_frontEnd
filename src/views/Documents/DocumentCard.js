@@ -28,17 +28,7 @@ const useStyles = makeStyles(styles);
 const DocumentCard = props => {
   const classes = useStyles();
 
-  const {
-    id,
-    title,
-    author,
-    description,
-    date,
-    link,
-    documentType,
-    viewCount,
-    downloadCount
-  } = props;
+  const { id, title, author, date, viewCount } = props;
   const url = "/document/" + id;
 
   const cardBody = () => {
@@ -56,13 +46,13 @@ const DocumentCard = props => {
               <i className={"fa fa-calendar"}>
                 &nbsp;
                 {date !== undefined ? new Date(date).toDateString() : null}
-                {/* &nbsp;&nbsp;&nbsp; */}
+                &nbsp;&nbsp;&nbsp;
               </i>
-              {/* <i className={"fa fa-folder-open"}>
-              &nbsp;
-              {documentType}
-              &nbsp;&nbsp;&nbsp;
-            </i> */}
+              <i className={"fa fa-eye"}>
+                &nbsp;
+                {viewCount}
+                &nbsp;&nbsp;&nbsp;
+              </i>
             </h5>
           </Muted>
         </CardBody>
@@ -83,10 +73,6 @@ DocumentCard.propTypes = {
   id: PropTypes.number,
   title: PropTypes.string,
   author: PropTypes.string,
-  description: PropTypes.string,
   date: PropTypes.string,
-  link: PropTypes.string,
-  documentType: PropTypes.string,
-  viewCount: PropTypes.number,
-  downloadCount: PropTypes.number
+  viewCount: PropTypes.number
 };

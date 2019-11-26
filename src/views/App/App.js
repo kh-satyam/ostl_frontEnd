@@ -18,7 +18,7 @@ export class App extends Component {
       <div>
         <Router history={this.hist}>
           <NavBar />
-          <Route exact path="/login" component={() => <LoginPage />} />
+          <Route exact path="/login" component={LoginPage} />
           <Route path="/admin" component={AdminDashBoard} />
           <Route path="/members" component={Members} />
           <Route
