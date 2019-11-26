@@ -8,7 +8,7 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
 import Axios from "axios";
-import cookie from "react-cookies";
+import cookies from "react-cookies";
 
 import { createBrowserHistory } from "history";
 
@@ -32,8 +32,13 @@ class DocumentInputComponent extends Component {
       title: "",
       docLinks: "",
       description: "",
-      file: null
+      file: null,
+      author: ""
     };
+  }
+
+  setAuthor(event) {
+    this.setState({ author: event.target.value });
   }
 
   setDocType(data) {
@@ -61,13 +66,15 @@ class DocumentInputComponent extends Component {
 
   checkDocumentFieldAreNotEmpty() {}
   addDocument() {
-    var ostlCookie = this.props.ostlCookie;
+    var ostlCookie = cookies.load("ostlCookie");
+    console.log("cookie:" + ostlCookie);
     let protocol = ostlCookie["protocol"];
     let domain = ostlCookie["domain"];
     var docType = this.state.docType;
     var docTitle = this.state.title;
     var docLinks = this.state.docLinks;
     var docDescription = this.state.description;
+    var docAuthor = this.state.author;
     var docFile = this.state.file;
     let date = new Date();
     let docMonth = date.getUTCMonth() + 1;
@@ -83,7 +90,8 @@ class DocumentInputComponent extends Component {
         dt: docType,
         description: docDescription,
         link: docLinks,
-        date: docDate
+        date: docDate,
+        author: docAuthor
       };
       console.log(JSON.stringify(docData));
       var formData = new FormData();
@@ -112,7 +120,7 @@ class DocumentInputComponent extends Component {
           console.log(errorStatusCode + " " + error);
           if (errorStatusCode === 401) {
             alert("Login Again");
-            cookie.remove("ostlCookie", { path: "/" });
+            ostlCookie.remove("ostlCookie", { path: "/" });
             //this.hist.push("/admin");
           } else {
             alert("Document cannot be uploaded.Please try again");
@@ -174,6 +182,19 @@ class DocumentInputComponent extends Component {
               inputProps={{
                 multiline: "true",
                 onChange: event => this.setDescription(event)
+              }}
+            />
+          </GridItem>
+          <GridItem xs={12} sm={12} md={12}>
+            <CustomInput
+              labelText="Authors"
+              id="authors"
+              formControlProps={{
+                fullWidth: true
+              }}
+              inputProps={{
+                multiline: "true",
+                onChange: event => this.setAuthor(event)
               }}
             />
           </GridItem>
