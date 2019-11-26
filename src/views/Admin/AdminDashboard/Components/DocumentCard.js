@@ -37,7 +37,8 @@ const DocumentCard = props => {
   const [modalOpen, setModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     'id': props.id, 'dt': props.type, 'title': props.title,
-    'description': props.description, 'link': props.link
+    'description': props.description, 'link': props.link,
+    author:props.author
   });
 
   const setDocType = (data) => {
@@ -49,6 +50,15 @@ const DocumentCard = props => {
 
   }
 
+  const setAuthor = (event) => {
+
+    let tempFormData = formData;
+    tempFormData['author'] = event.target.value;
+    setFormData(tempFormData);
+    console.log(formData);
+
+  }
+  
   const setTitle = (event) => {
 
     let tempFormData = formData;
@@ -116,7 +126,7 @@ const DocumentCard = props => {
   }
 
   const deleteDocument = () => {
-
+    
     let ostlCookie = cookies.load("ostlCookie");
     let protocol = ostlCookie['protocol'];
     let domain = ostlCookie['domain'];
@@ -183,7 +193,7 @@ const DocumentCard = props => {
         <h4 className={classes.cardTitle}>{title}</h4>
         {!expand ? (
           <h5 className={classes.cardSubtitle}>
-            {id}, {date}, {author}
+            {new Date(date).toDateString()},<br></br> {author}
           </h5>
         ) : (
             <div>
@@ -237,7 +247,20 @@ const DocumentCard = props => {
                     }}
                   />
                 </GridItem>
-
+                <GridItem xs={12} sm={12} md={12}>
+                  <CustomInput
+                    labelText="Authors"
+                    id="authors"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      defaultValue: formData['author'],
+                      multiline: "true",
+                      onChange: (event) => setAuthor(event)
+                    }}
+                  />
+                </GridItem>     
               </GridContainer>
               <div className={classes.textCenter}>
                 <Button round color="success" onClick={updateDocument}>

@@ -74,7 +74,7 @@ class AdminDashboard extends Component {
           tabs={[
             {
               tabButton: "Upload Document",
-              tabContent: <DocumentInputComponent ostlCookie={this.state.cookieObj} />
+              tabContent: <DocumentInputComponent />
             },
             {
               tabButton: "Update Publications",
